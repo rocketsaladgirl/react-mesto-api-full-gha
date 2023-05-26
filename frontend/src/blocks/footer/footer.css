@@ -1,0 +1,19 @@
+.footer {
+    width: 68.75%;
+    max-width: 880px;
+    margin: 0 auto;
+    margin-bottom: 60px;
+}
+
+  /*Расширение от 1024px до 1280px*/
+  
+  /*Расширение от 768px до 1024px*/
+  
+  /*Расширение от 320px до 768px
+@media screen and (max-width: 661px) {
+    .footer {
+        width: 88.13%;
+        max-width: 282px;
+        margin-bottom: 36px;
+    }    
+}*/

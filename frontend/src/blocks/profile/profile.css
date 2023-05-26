@@ -1,0 +1,11 @@
+.profile {
+    width: 100%;
+    max-width: 880px;
+    margin: 0 auto;
+    margin-bottom: 51px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+  }

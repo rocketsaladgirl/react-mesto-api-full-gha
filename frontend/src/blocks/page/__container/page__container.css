@@ -1,0 +1,29 @@
+.page__container {  
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    background-color: #000000;
+    color: #FFFFFF;
+    box-sizing: border-box;
+  }
+/*Расширение от 1024px до 1280px  
+@media screen and (max-width: 1024px) {
+    .page__container {
+        max-width: 1024px;
+    }
+}
+
+Расширение от 768px до 1024px
+@media screen and (max-width: 768px) {
+    .page__container {
+        max-width: 768px;
+    }
+}
+Расширение от 320px до 768px 
+@media screen and (max-width: 320px) {
+    .page__container {
+        max-width: 320px;
+    }
+}*/

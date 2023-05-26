@@ -1,0 +1,17 @@
+.element__title {
+    max-width: 80%;
+    margin: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 24px;
+    line-height: 29.05px;
+    font-weight: 900;
+    color: #000;
+}
+
+  /*Расширение от 1024px до 1280px*/
+  
+  /*Расширение от 768px до 1024px*/
+  
+  /*Расширение от 320px до 768px*/

@@ -1,0 +1,16 @@
+.element {
+    width: 100%;
+    max-width: 282px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: #FFF;
+    border-radius: 10px;
+    box-sizing: border-box;
+  }
+  
+  /*Расширение от 1024px до 1280px*/
+  
+  /*Расширение от 768px до 1024px*/
+  
+  /*Расширение от 320px до 768px*/

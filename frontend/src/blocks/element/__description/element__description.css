@@ -1,0 +1,16 @@
+.element__description {
+    max-width: 246px;
+    margin: 0px 15px 25px 21px;
+    padding: 0;
+    padding-right: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+  /*Расширение от 1024px до 1280px*/
+  
+  /*Расширение от 768px до 1024px*/
+  
+  /*Расширение от 320px до 768px*/

@@ -1,0 +1,13 @@
+.popup__field {
+    width: 83.26%;
+    max-width: 358px;
+    margin: 0px auto;
+    /*margin-bottom: 30px;*/
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    border: none;
+}
+
+

@@ -1,0 +1,12 @@
+.profile__overlay {
+    width: 120px;
+    height: 120px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    background: rgba(0, 0, 0, 0.8) url(../../../images/logo/pen_image_icon.svg) no-repeat center;
+    background-size: 26px 26px;
+    border-radius: 50%;
+    cursor: pointer;
+}

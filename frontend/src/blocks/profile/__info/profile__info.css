@@ -1,0 +1,6 @@
+.profile__info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    box-sizing: border-box;
+  }

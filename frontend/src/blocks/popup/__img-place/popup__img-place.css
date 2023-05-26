@@ -1,0 +1,12 @@
+.popup__img-place {
+    width: 100%;
+    max-width: 816px;
+    height: 540px;
+    margin: 0;
+    margin-bottom: 10px;
+    padding: 0;
+    object-fit: cover;
+    box-sizing: border-box;
+    border: none;
+}
+

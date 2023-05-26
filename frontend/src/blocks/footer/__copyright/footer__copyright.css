@@ -1,0 +1,20 @@
+.footer__copyright {
+    margin: 0px;
+    text-align: left;
+    font-size: 18px;
+    line-height: 21.78px;
+    font-weight: 400;
+    color: #545454;
+}
+
+  /*Расширение от 1024px до 1280px*/
+  
+  /*Расширение от 768px до 1024px*/
+  
+  /*Расширение от 320px до 768px
+@media screen and (max-width: 661px) {
+    .footer__copyright {
+        font-size: 14px;
+        line-height: 16.94px;
+    }
+}*/
