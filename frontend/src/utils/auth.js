@@ -23,7 +23,7 @@ export function loginUser(email, password) {
 }
 
 //Проверка токена
-export function getToken() { //было export function getToken(token)
+export function getToken() {
   const token = localStorage.getItem('jwt');
 
   return fetch(`${BASE_URL}/users/me`, {
