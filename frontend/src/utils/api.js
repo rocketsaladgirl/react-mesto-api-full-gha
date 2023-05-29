@@ -1,28 +1,38 @@
 class Api {
     constructor(config) {
-        this.headers = config.headers;
+        //this.headers = config.headers; - удаляем
         this.baseURL = config.baseURL;
 
     }
     
     //метод добавления карточек на сервер
-    createItem (item) {
-         return fetch(`${this.baseURL}/cards`, {
-                headers: this.headers,
-                method: 'POST',
-                body: JSON.stringify({
-                        name: item.name,
-                        link: item.link
-                })
-         })
+    createItem ({ name, link }) { //было createItem (item)
+        const token = localStorage.getItem('jwt');
+
+        return fetch(`${this.baseURL}/cards`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            }, //было this.headers,
+            method: 'POST',
+            body: JSON.stringify({
+                name, // было name: item.name,
+                link, // было link: item.link
+            })
+        })
         .then(res => this._checkServerResponse(res));
      }
     
     
     //метод удаления карточки 
-    deleteItem(id) {
-        return fetch(`${this.baseURL}/cards/${id}`, {
-            headers: this.headers,
+    deleteItem(cardId) {
+        const token = localStorage.getItem('jwt');
+
+        return fetch(`${this.baseURL}/cards/${cardId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            }, //было this.headers,
             method: 'DELETE',
         })
         .then(res => this._checkServerResponse(res));
@@ -30,9 +40,13 @@ class Api {
 
     //метод получения массива карточек с сервера
     getCardList() {
+        const token = localStorage.getItem('jwt');
         return fetch(`${this.baseURL}/cards`, {
-                headers: this.headers,
-                method: 'GET',
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            }, //было this.headers,
+            method: 'GET',
         })
         .then(res => this._checkServerResponse(res));
     }
@@ -49,66 +63,101 @@ class Api {
 
     //получить данные пользователя
     getUserInfo() {
+        const token = localStorage.getItem('jwt');
         return fetch(`${this.baseURL}/users/me`, {
-            headers: this.headers,
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            }, //было this.headers,
             method: 'GET',
         })
         .then(res => this._checkServerResponse(res));
     }
 
     //редактировать данные пользователя
-    setUserInfo(data) {
+    setUserInfo({ name, about }) { //было setUserInfo(data)
+        const token = localStorage.getItem('jwt');
         return fetch(`${this.baseURL}/users/me`, {
-            headers: this.headers,
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            }, //было this.headers,
             method: 'PATCH',
             body: JSON.stringify({
-                name: data.name, 
-                about: data.about,
+                name, //было name: data.name,
+                about, //было about: data.about,
             })
         })
         .then(res => this._checkServerResponse(res));
     }
 
     //метод редактирования аватара пользователя
-    setUserAvatar(data) {
+    setUserAvatar({ avatar }) { //было setUserAvatar(data)
+        const token = localStorage.getItem('jwt');
         return fetch(`${this.baseURL}/users/me/avatar`, {
-            headers: this.headers,
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            }, //было this.headers,
             method: 'PATCH',
             body: JSON.stringify({
-                avatar: data.avatar, 
+                avatar, //было avatar: data.avatar
             })
         })
         .then(res => this._checkServerResponse(res));
 
     }
 
-    //Метод постановки лайка у карточки
-    putLike(id) {
-        return fetch(`${this.baseURL}/cards/${id}/likes`, {
-            headers: this.headers,
-            method: 'PUT',
+    // //Метод постановки лайка у карточки
+    // putLike(cardId) {
+    //     const token = localStorage.getItem('jwt');
+        
+    //     return fetch(`${this.baseURL}/cards/${cardId}/likes`, {
+    //         headers: {
+    //             Authorization: `Bearer ${token}`,
+    //             'Content-Type': 'application/json',
+    //         }, //было this.headers,
+    //         method: 'PUT',
+    //     })
+    //     .then(res => this._checkServerResponse(res));
+    // }
+
+    // //Метод удаления лайка
+    // deleteLike(cardId) {
+    //     const token = localStorage.getItem('jwt');
+
+    //     return fetch(`${this.baseURL}/cards/${cardId}/likes`, {
+    //         headers: {
+    //             Authorization: `Bearer ${token}`,
+    //             'Content-Type': 'application/json',
+    //         }, //было this.headers,
+    //         method: 'DELETE',
+    //     })
+    //     .then(res => this._checkServerResponse(res));
+    // }
+    
+    //Метод постановки и удаления лайка у карточки
+    changeLike(cardId, isLiked) {
+        const token = localStorage.getItem('jwt');
+
+        return fetch(`${this.baseURL}/cards/${cardId}/likes`, {
+            method: isLiked ? 'DELETE' : 'PUT',
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            }, //было this.headers,
         })
         .then(res => this._checkServerResponse(res));
-    }
-
-    //Метод удаления лайка
-    deleteLike(id) {
-        return fetch(`${this.baseURL}/cards/${id}/likes`, {
-            headers: this.headers,
-            method: 'DELETE',
-        })
-        .then(res => this._checkServerResponse(res));
-
     }
 
 }
 //Данные для API-config
 const apiConfig = {
-    baseURL: 'https://mesto.nomoreparties.co/v1/cohort-60',
-    headers: {
-       authorization: '00dc86b0-ecbd-4369-8113-e361344c4b76',
-       'Content-Type': 'application/json'
-    }
+    baseURL: 'http://localhost:3000', // базовый url, было https://mesto.nomoreparties.co/v1/cohort-60
+    //headers: {
+       //authorization: '00dc86b0-ecbd-4369-8113-e361344c4b76',
+    //   'Content-Type': 'application/json',
+    //} - удаляем
  };
 
 const api = new Api(apiConfig);

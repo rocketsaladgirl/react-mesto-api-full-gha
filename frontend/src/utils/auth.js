@@ -1,4 +1,4 @@
-export const BASE_URL = "https://auth.nomoreparties.co"; //базовый URL
+export const BASE_URL = "http://localhost:3000"; //базовый URL, адрес , бэк-энда, было https://auth.nomoreparties.co
 
 //Регистрация пользователя
 export function registerUser(email, password) {
@@ -23,12 +23,14 @@ export function loginUser(email, password) {
 }
 
 //Проверка токена
-export function getToken(jwt) {
+export function getToken() { //было export function getToken(token)
+  const token = localStorage.getItem('jwt');
+
   return fetch(`${BASE_URL}/users/me`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${jwt}`,
+      Authorization: `Bearer ${token}`,
     },
   }).then(checkResponse);
 }

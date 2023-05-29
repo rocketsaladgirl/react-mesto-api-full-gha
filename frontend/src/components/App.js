@@ -67,12 +67,13 @@ function App() {
 
     //Эффект проверяюший токен
     React.useEffect(() => {
-        const jwt = localStorage.getItem("jwt");
-        if (jwt) {
-            auth.getToken(jwt).then((res) => {
+        const token = localStorage.getItem("jwt"); //было const jwt = localStorage.getItem("jwt");
+
+        if (token) {
+            auth.getToken(token).then((res) => { //было auth.getToken(jwt).then((res) =>
         if (res) {
             setIsLoggedIn(true);
-            setEmailName(res.data.email);
+            setEmailName(res.email); //было setEmailName(res.data.email)
             }
         }).catch((err) => {
             console.error(err);
@@ -194,20 +195,29 @@ function App() {
     };
 
     function handleCardLike(card) {
-        const isLiked = card.likes.some(user => user._id === currentUser._id);
-            api.putLike(card._id, !isLiked)
+        const isLiked = card.likes.some((id) => id === currentUser._id);
+        //console.log(isLiked);
+            // api.putLike(card._id, !isLiked)
+            //     .then((newCard) => {setCards((
+            //         state) => state.map(
+            //             (c) => c._id === card._id ? newCard : c));
+            //     })
+            //     .catch(err => console.log(err));
+            
+            // api.deleteLike(card._id, !isLiked)
+            //     .then((newCard) => {setCards((
+            //         state) => state.map(
+            //             (c) => c._id === card._id ? newCard : c));
+            //     })    
+            //     .catch(err => console.log(err));
+            api.changeLike(card._id, isLiked)
                 .then((newCard) => {setCards((
                     state) => state.map(
                         (c) => c._id === card._id ? newCard : c));
                 })
                 .catch(err => console.log(err));
-            api.deleteLike(card._id, !isLiked)
-                .then((newCard) => {setCards((
-                    state) => state.map(
-                        (c) => c._id === card._id ? newCard : c));
-                })    
-                .catch(err => console.log(err));
     };
+
 
     function handleCardDelete(card) {
         api.deleteItem(card._id)
@@ -217,7 +227,6 @@ function App() {
             .catch(err => console.log(err));
     };
 
-    //Функция разлогиневания пользователя - у меня нет
     function onSignOut() {
         setIsLoggedIn(false);
         setEmailName(null);
