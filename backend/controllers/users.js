@@ -16,41 +16,67 @@ module.exports.getUsers = (req, res, next) => {
     .catch(next);
 };
 
+// module.exports.getUserById = (req, res, next) => {
+//   const { userId } = req.params;
+
+//   userSchema
+//     .findById(userId)
+//     .then((user) => {
+//       if (!user) {
+//         throw new NotFoundError('Пользователь по указанному _id не найден');
+//       }
+//       res.send(user);
+//     })
+//     .catch((err) => {
+//       if (err.name === 'CastError') {
+//       return next(new BadRequestError('Переданы некорректные данные при создании пользователя'));
+//       }
+//       return next(err);
+//     });
+// };
+
 module.exports.getUserById = (req, res, next) => {
   const { userId } = req.params;
 
   userSchema
     .findById(userId)
-    .then((user) => {
-      if (!user) {
-        throw new NotFoundError('Пользователь по указанному _id не найден');
-      }
-      res.send(user);
-    })
+    .orFail()
+    .then((user) => res.status(200).send(user))
     .catch((err) => {
-      if (err.name === 'CastError') {
-        return next(new BadRequestError('Переданы некорректные данные при создании пользователя'));
+      if (err.name === 'DocumentNotFoundError') {
+        return res.status(NotFoundError).send({ message: 'Пользователь не найден' });
       }
       return next(err);
     });
 };
 
+// module.exports.getUser = (req, res, next) => {
+//   userSchema
+//     .findById(req.user._id)
+//     .then((user) => {
+//       if (!user) {
+//         throw new NotFoundError('Пользователь не найден');
+//       }
+//       res.status(200)
+//         .send(user);
+//     })
+//     .catch((err) => {
+//       if (err.name === 'CastError') {
+//         next(BadRequestError('Переданы некорректные данные'));
+//       } else {
+//         next(err);
+//       }
+//     });
+// };
 module.exports.getUser = (req, res, next) => {
-  userSchema
-    .findById(req.user._id)
-    .then((user) => {
-      if (!user) {
-        throw new NotFoundError('Пользователь не найден');
-      }
-      res.status(200)
-        .send(user);
-    })
+  userSchema.findById(req.user._id)
+    .orFail()
+    .then((user) => res.status(200).send(user))
     .catch((err) => {
-      if (err.name === 'CastError') {
-        next(BadRequestError('Переданы некорректные данные'));
-      } else {
-        next(err);
+      if (err.name === 'DocumentNotFoundError') {
+        return res.status(NotFoundError).send({ message: 'Пользователь не найден' });
       }
+      return next(err);
     });
 };
 
@@ -121,7 +147,7 @@ module.exports.updateUser = (req, res, next) => {
     .then((user) => res.status(200)
       .send(user))
     .catch((err) => {
-      if (err.name === 'CastError' || err.name === 'ValidationError') {
+      if (err.name === 'ValidationError') {
         return next(new BadRequestError('Переданы некорректные данные при обновлении профиля'));
       }
       return next(err);

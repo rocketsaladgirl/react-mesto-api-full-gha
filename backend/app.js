@@ -21,6 +21,7 @@ const {
 const app = express();
 
 app.use(cors());
+app.use(helmet());
 
 app.use(express.json());
 
@@ -39,7 +40,6 @@ app.use(auth);
 app.use(router);
 app.use(errorLogger);
 app.use(errors());
-app.use(helmet());
 app.use(handleError);
 
 async function start() {
@@ -47,9 +47,11 @@ async function start() {
     await mongoose.connect(MONGO_URL);
     await app.listen(PORT);
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.log(err);
   }
 }
 
 start()
+  // eslint-disable-next-line no-console
   .then(() => console.log(`Приложение успешно запущенно!\n${MONGO_URL}\nPort: ${PORT}`));
