@@ -75,7 +75,7 @@ class Api {
     }
 
     //редактировать данные пользователя
-    setUserInfo({ name, about }) { //было setUserInfo(data)
+    setUserInfo({ name, about }) {
         const token = localStorage.getItem('jwt');
         return fetch(`${this.baseURL}/users/me`, {
             headers: {
@@ -84,15 +84,15 @@ class Api {
             }, //было this.headers,
             method: 'PATCH',
             body: JSON.stringify({
-                name, //было name: data.name,
-                about, //было about: data.about,
+                name,
+                about,
             })
         })
         .then(res => this._checkServerResponse(res));
     }
 
     //метод редактирования аватара пользователя
-    setUserAvatar({ avatar }) { //было setUserAvatar(data)
+    setUserAvatar({ avatar }) {
         const token = localStorage.getItem('jwt');
         return fetch(`${this.baseURL}/users/me/avatar`, {
             headers: {
@@ -101,40 +101,12 @@ class Api {
             }, //было this.headers,
             method: 'PATCH',
             body: JSON.stringify({
-                avatar, //было avatar: data.avatar
+                avatar,
             })
         })
         .then(res => this._checkServerResponse(res));
 
     }
-
-    // //Метод постановки лайка у карточки
-    // putLike(cardId) {
-    //     const token = localStorage.getItem('jwt');
-        
-    //     return fetch(`${this.baseURL}/cards/${cardId}/likes`, {
-    //         headers: {
-    //             Authorization: `Bearer ${token}`,
-    //             'Content-Type': 'application/json',
-    //         }, //было this.headers,
-    //         method: 'PUT',
-    //     })
-    //     .then(res => this._checkServerResponse(res));
-    // }
-
-    // //Метод удаления лайка
-    // deleteLike(cardId) {
-    //     const token = localStorage.getItem('jwt');
-
-    //     return fetch(`${this.baseURL}/cards/${cardId}/likes`, {
-    //         headers: {
-    //             Authorization: `Bearer ${token}`,
-    //             'Content-Type': 'application/json',
-    //         }, //было this.headers,
-    //         method: 'DELETE',
-    //     })
-    //     .then(res => this._checkServerResponse(res));
-    // }
     
     //Метод постановки и удаления лайка у карточки
     changeLike(cardId, isLiked) {
@@ -153,12 +125,8 @@ class Api {
 }
 //Данные для API-config
 const apiConfig = {
-    baseURL: 'http://localhost:3000', // базовый url, было https://mesto.nomoreparties.co/v1/cohort-60
-    //headers: {
-       //authorization: '00dc86b0-ecbd-4369-8113-e361344c4b76',
-    //   'Content-Type': 'application/json',
-    //} - удаляем
- };
+    baseURL: 'https://api.rocketsaladgirl.nomoredomains.monster', // базовый url, было http://localhost:3000
+};
 
 const api = new Api(apiConfig);
 

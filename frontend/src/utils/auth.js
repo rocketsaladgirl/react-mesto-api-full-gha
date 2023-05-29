@@ -1,4 +1,4 @@
-export const BASE_URL = "http://localhost:3000"; //базовый URL, адрес , бэк-энда, было https://auth.nomoreparties.co
+export const BASE_URL = "https://api.rocketsaladgirl.nomoredomains.monster"; //базовый URL, адрес , бэк-энда, было http://localhost:3000
 
 //Регистрация пользователя
 export function registerUser(email, password) {
