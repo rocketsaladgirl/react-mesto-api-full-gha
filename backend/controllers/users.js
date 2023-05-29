@@ -16,24 +16,24 @@ module.exports.getUsers = (req, res, next) => {
     .catch(next);
 };
 
-// module.exports.getUserById = (req, res, next) => {
-//   const { userId } = req.params;
+module.exports.getUserById = (req, res, next) => {
+  const { userId } = req.params;
 
-//   userSchema
-//     .findById(userId)
-//     .then((user) => {
-//       if (!user) {
-//         throw new NotFoundError('Пользователь по указанному _id не найден');
-//       }
-//       res.send(user);
-//     })
-//     .catch((err) => {
-//       if (err.name === 'CastError') {
-//       return next(new BadRequestError('Переданы некорректные данные при создании пользователя'));
-//       }
-//       return next(err);
-//     });
-// };
+  userSchema
+    .findById(userId)
+    .then((user) => {
+      if (!user) {
+        throw new NotFoundError('Пользователь по указанному _id не найден');
+      }
+      res.send(user);
+    })
+    .catch((err) => {
+      if (err.name === 'CastError') {
+        return next(new BadRequestError('Переданы некорректные данные при создании пользователя'));
+      }
+      return next(err);
+    });
+};
 
 module.exports.getUserById = (req, res, next) => {
   const { userId } = req.params;
@@ -53,39 +53,22 @@ module.exports.getUserById = (req, res, next) => {
     });
 };
 
-// module.exports.getUser = (req, res, next) => {
-//   userSchema
-//     .findById(req.user._id)
-//     .then((user) => {
-//       if (!user) {
-//         throw new NotFoundError('Пользователь не найден');
-//       }
-//       res.status(200)
-//         .send(user);
-//     })
-//     .catch((err) => {
-//       if (err.name === 'CastError') {
-//         next(BadRequestError('Переданы некорректные данные'));
-//       } else {
-//         next(err);
-//       }
-//     });
-// };
 module.exports.getUser = (req, res, next) => {
-  const { userId } = req.params;
-
   userSchema
-    .findById(userId)
-    .orFail(() => {
-      throw new NotFoundError('Пользователь с указанным _id не найден');
-    })
-    .then((user) => res.status(200)
-      .send(user))
-    .catch((err) => {
-      if (err.name === 'ValidationError') {
-        return next(new BadRequestError('Переданы некорректные данные пользователя'));
+    .findById(req.user._id)
+    .then((user) => {
+      if (!user) {
+        throw new NotFoundError('Пользователь не найден');
       }
-      return next(err);
+      res.status(200)
+        .send(user);
+    })
+    .catch((err) => {
+      if (err.name === 'CastError') {
+        next(BadRequestError('Переданы некорректные данные'));
+      } else {
+        next(err);
+      }
     });
 };
 
