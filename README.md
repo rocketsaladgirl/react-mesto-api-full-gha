@@ -9,8 +9,8 @@
 
 ## Ссылки на проект
 
-IP-адрес 51.250.75.147
+IP-адрес 51.250.75.147  
 
-Frontend <https://rocketsaladgirl.nomoredomains.monster>
+Frontend https://rocketsaladgirl.nomoredomains.monster/
 
-Backend <https://api.rocketsaladgirl.nomoredomains.monster>
+Backend https://api.rocketsaladgirl.nomoredomains.monster/
