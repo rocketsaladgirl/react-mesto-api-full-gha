@@ -5,12 +5,12 @@
   
 Пожалуйста, прикрепите в это описание ссылку на сайт, размещенный на Яндекс.Облаке.
 
-Адрес репозитория: https://github.com/...
+Адрес репозитория: https://github.com/rocketsaladgirl/react-mesto-api-full-gha.git
 
 ## Ссылки на проект
 
-IP-адрес x.x.x.x
+IP-адрес 51.250.75.147
 
-Frontend https://...
+Frontend https://rocketsaladgirl.nomoredomains.monster
 
-Backend https://...
+Backend https://api.rocketsaladgirl.nomoredomains.monster
