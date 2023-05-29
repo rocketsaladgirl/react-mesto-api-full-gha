@@ -35,24 +35,6 @@ module.exports.getUserById = (req, res, next) => {
     });
 };
 
-module.exports.getUserById = (req, res, next) => {
-  const { userId } = req.params;
-
-  userSchema
-    .findById(userId)
-    .orFail(() => {
-      throw new NotFoundError('Пользователь с указанным _id не найден');
-    })
-    .then((user) => res.status(200)
-      .send(user))
-    .catch((err) => {
-      if (err.name === 'ValidationError') {
-        return next(new BadRequestError('Переданы некорректные данные при создании пользователя'));
-      }
-      return next(err);
-    });
-};
-
 module.exports.getUser = (req, res, next) => {
   userSchema
     .findById(req.user._id)
@@ -64,7 +46,7 @@ module.exports.getUser = (req, res, next) => {
         .send(user);
     })
     .catch((err) => {
-      if (err.name === 'CastError') {
+      if (err.name === 'ValidationError') {
         next(BadRequestError('Переданы некорректные данные'));
       } else {
         next(err);
@@ -164,7 +146,7 @@ module.exports.updateAvatar = (req, res, next) => {
     .then((user) => res.status(200)
       .send(user))
     .catch((err) => {
-      if (err.name === 'CastError' || err.name === 'ValidationError') {
+      if (err.name === 'ValidationError') {
         return next(new BadRequestError('Переданы некорректные данные при обновлении аватара'));
       }
       return next(err);
