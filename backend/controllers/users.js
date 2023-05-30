@@ -16,61 +16,60 @@ module.exports.getUsers = (req, res, next) => {
     .catch(next);
 };
 
-// const findUser = (id, res, next) => {
-//   userSchema
-//     .findById(id)
-//     .orFail()
-//     .then((user) => res.status(200).send(user))
-//     .catch((err) => {
-//       if (err.name === 'DocumentNotFoundError') {
-//         return res.status(NotFoundError).send({ message: 'Пользователь по данному _id не найден' });
-//       }
-//       return next(err);
-//     });
-// };
-
-// module.exports.getUser = (req, res, next) => findUser(req.user._id, res, next);
-
-// module.exports.getUserById = (req, res, next) => findUser(req.params.userId, res, next);
-
-module.exports.getUserById = (req, res, next) => {
-  const { userId } = req.params;
-
+const findUser = (id, res, next) => {
   userSchema
-    .findById(userId)
-    .then((user) => {
-      if (!user) {
-        throw new NotFoundError('Пользователь по указанному _id не найден');
-      }
-      res.send(user);
-    })
+    .findById(id)
+    .orFail()
+    .then((user) => res.status(200).send(user))
     .catch((err) => {
-      if (err.name === 'CastError') {
-        return next(new BadRequestError('Переданы некорректные данные при создании пользователя'));
+      if (err.name === 'DocumentNotFoundError') {
+        return next(new NotFoundError('Пользователь по данному _id не найден'));
       }
       return next(err);
     });
 };
 
-module.exports.getUser = (req, res, next) => {
-  userSchema
-    .findById(req.user._id)
-    .then((user) => {
-      if (!user) {
-        throw new NotFoundError('Пользователь не найден');
-      }
-      res.status(200)
-        .send(user);
-    })
-    .catch(next);
-  // .catch((err) => {
-  //   if (err.name === 'ValidationError') {
-  //     next(BadRequestError('Переданы некорректные данные'));
-  //   } else {
-  //     next(err);
-  //   }
-  // });
-};
+module.exports.getUser = (req, res, next) => findUser(req.user._id, res, next);
+
+module.exports.getUserById = (req, res, next) => findUser(req.params.userId, res, next);
+
+// module.exports.getUserById = (req, res, next) => {
+//   const { userId } = req.params;
+
+//   userSchema
+//     .findById(userId)
+//     .then((user) => {
+//       if (!user) {
+//         throw new NotFoundError('Пользователь по указанному _id не найден');
+//       }
+//       res.send(user);
+//     })
+//     .catch((err) => {
+//       if (err.name === 'CastError') {
+//       return next(new BadRequestError('Переданы некорректные данные при создании пользователя'));
+//       }
+//       return next(err);
+//     });
+// };
+
+// module.exports.getUser = (req, res, next) => {
+//   userSchema
+//     .findById(req.user._id)
+//     .then((user) => {
+//       if (!user) {
+//         throw new NotFoundError('Пользователь не найден');
+//       }
+//       res.status(200)
+//         .send(user);
+//     })
+//   // .catch((err) => {
+//   //   if (err.name === 'ValidationError') {
+//   //     next(BadRequestError('Переданы некорректные данные'));
+//   //   } else {
+//   //     next(err);
+//   //   }
+//   // });
+// };
 
 module.exports.createUser = (req, res, next) => {
   const {
