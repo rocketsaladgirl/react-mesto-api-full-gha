@@ -1,5 +1,3 @@
-
-
 # "MESTO" (react-mesto-api-full)
 ![mesto](https://github.com/rocketsaladgirl/react-mesto-api-full-gha/assets/114432448/a7b8055c-a90e-47a8-a228-3ceff810d3b0)
 
