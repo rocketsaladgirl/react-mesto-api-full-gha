@@ -32,17 +32,27 @@
 + Node.
 
 ## Установка проекта:
-`npm run start` — запускает сервер   
-`npm run dev` — запускает сервер с hot-reload</br>
-`npm run build` — запускает сборку приложения
-  
-## Ссылки на проект:
+Для запуска проекта необходимо сделать несколько простых шагов:
 
-IP 51.250.75.147
+- Склонируйте этот репозиторий в нужную папку:
 
-Frontend: https://rocketsaladgirl.nomoredomains.monster/
+```
+git clone https://github.com/rocketsaladgirl/movies-explorer-frontend.git
+```
 
-Backend: https://api.rocketsaladgirl.nomoredomains.monster/
+- Установите все зависимости:
+
+```
+npm install
+```
+
+- Теперь можно запустить проект:
+
+```
+npm run start — запускает сервер
+npm run dev — запускает сервер с hot-reload</br>
+npm run build — запускает сборку приложения
+```
 
 ## Тесты:
 
