@@ -37,7 +37,7 @@
 - Склонируйте этот репозиторий в нужную папку:
 
 ```
-git clone https://github.com/rocketsaladgirl/movies-explorer-frontend.git
+git clone https://github.com/rocketsaladgirl/react-mesto-api-full-gha.git
 ```
 
 - Установите все зависимости:
