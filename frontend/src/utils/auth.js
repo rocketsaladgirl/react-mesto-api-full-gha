@@ -1,4 +1,4 @@
-export const BASE_URL = "https://api.rocketsaladgirl.nomoredomains.monster"; //базовый URL, адрес , бэк-энда, было http://localhost:3000
+export const BASE_URL = "http://localhost:3000"; //базовый URL, адрес , бэк-энда, было https://api.rocketsaladgirl.nomoredomains.monster
 
 //Регистрация пользователя
 export function registerUser(email, password) {

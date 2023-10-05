@@ -125,7 +125,7 @@ class Api {
 }
 //Данные для API-config
 const apiConfig = {
-    baseURL: 'https://api.rocketsaladgirl.nomoredomains.monster', // базовый url, было http://localhost:3000
+    baseURL: 'http://localhost:3000', // базовый url, было https://api.rocketsaladgirl.nomoredomains.monster
 };
 
 const api = new Api(apiConfig);
